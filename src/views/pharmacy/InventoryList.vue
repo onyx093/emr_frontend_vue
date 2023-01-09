@@ -139,19 +139,13 @@ const paginationData = computed(() => {
         <thead>
           <tr>
             <th scope="col">
-              USER
+              DRUG NAME
             </th>
             <th scope="col">
-              ROLE
+              GENERIC NAME
             </th>
             <th scope="col">
-              PLAN
-            </th>
-            <th scope="col">
-              BILLING
-            </th>
-            <th scope="col">
-              STATUS
+              UNIT OF MEASURE
             </th>
             <th scope="col">
               ACTIONS
@@ -165,68 +159,19 @@ const paginationData = computed(() => {
             :key="user.id"
             style="height: 3.75rem;"
           >
-            <!-- 👉 User -->
+            <!-- 👉 Drug Name -->
             <td>
-              <div class="d-flex align-center">
-                <VAvatar
-                  variant="tonal"
-                  :color="resolveUserRoleVariant(user.role).color"
-                  class="me-3"
-                  size="38"
-                >
-                  <VImg
-                    v-if="user.avatar"
-                    :src="user.avatar"
-                  />
-                  <span v-else>{{ avatarText(user.fullName) }}</span>
-                </VAvatar>
-
-                <div class="d-flex flex-column">
-                  <h6 class="text-base">
-                    <RouterLink
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                      class="font-weight-medium user-list-name"
-                    >
-                      {{ user.fullName }}
-                    </RouterLink>
-                  </h6>
-                  <span class="text-sm text-disabled">@{{ user.email }}</span>
-                </div>
-              </div>
+              <span class="text-capitalize text-base font-weight-semibold">1/2 Strength Darrows (500ml)</span>
             </td>
 
-            <!-- 👉 Role -->
+            <!-- 👉 Generic Name -->
             <td>
-              <VAvatar
-                :color="resolveUserRoleVariant(user.role).color"
-                :icon="resolveUserRoleVariant(user.role).icon"
-                variant="tonal"
-                size="30"
-                class="me-4"
-              />
-              <span class="text-capitalize text-base">{{ user.role }}</span>
+              <span class="text-capitalize text-base font-weight-semibold">1/2 Strength Darrows (500ml)</span>
             </td>
 
-            <!-- 👉 Plan -->
+            <!-- 👉 Unit of Measure -->
             <td>
-              <span class="text-capitalize text-base font-weight-semibold">{{ user.currentPlan }}</span>
-            </td>
-
-            <!-- 👉 Billing -->
-            <td>
-              <span class="text-base">{{ user.billing }}</span>
-            </td>
-
-            <!-- 👉 Status -->
-            <td>
-              <VChip
-                label
-                :color="resolveUserStatusVariant(user.status)"
-                size="small"
-                class="text-capitalize"
-              >
-                {{ user.status }}
-              </VChip>
+              <span class="text-capitalize text-base font-weight-semibold">500ml</span>
             </td>
 
             <!-- 👉 Actions -->
@@ -254,33 +199,8 @@ const paginationData = computed(() => {
               >
                 <VIcon
                   size="22"
-                  icon="tabler-trash"
+                  icon="tabler-settings"
                 />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-dots-vertical"
-                />
-
-                <VMenu activator="parent">
-                  <VList>
-                    <VListItem
-                      title="View"
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                    />
-                    <VListItem
-                      title="Suspend"
-                      href="javascript:void(0)"
-                    />
-                  </VList>
-                </VMenu>
               </VBtn>
             </td>
           </tr>

@@ -178,16 +178,19 @@ const paginationData = computed(() => {
         <thead>
           <tr>
             <th scope="col">
-              USER
+              PATIENT NAME
             </th>
             <th scope="col">
-              ROLE
+              REASON
             </th>
             <th scope="col">
-              PLAN
+              DATE OF ADMISSION
             </th>
             <th scope="col">
-              BILLING
+              ADMITTED BY
+            </th>
+            <th scope="col">
+              ACCOMMODATION
             </th>
             <th scope="col">
               STATUS
@@ -234,26 +237,29 @@ const paginationData = computed(() => {
               </div>
             </td>
 
-            <!-- 👉 Role -->
+            <!-- 👉 Reason -->
             <td>
-              <VAvatar
-                :color="resolveUserRoleVariant(user.role).color"
-                :icon="resolveUserRoleVariant(user.role).icon"
-                variant="tonal"
-                size="30"
-                class="me-4"
+              <span class="text-capitalize text-base">RDS</span>
+            </td>
+
+            <!-- 👉 Date Of Admission -->
+            <td>
+              <span class="text-base">{{ new Date().toLocaleString() }}</span>
+            </td>
+
+            <!-- 👉 Admiited By -->
+            <td>
+              <span class="text-base">Okoro Matthew</span>
+            </td>
+
+            <!-- 👉 Accommodation -->
+            <td>
+              <span class="text-base">COT</span>
+              <VIcon
+                size="22"
+                icon="tabler-bed"
+                color="error"
               />
-              <span class="text-capitalize text-base">{{ user.role }}</span>
-            </td>
-
-            <!-- 👉 Plan -->
-            <td>
-              <span class="text-capitalize text-base font-weight-semibold">{{ user.currentPlan }}</span>
-            </td>
-
-            <!-- 👉 Billing -->
-            <td>
-              <span class="text-base">{{ user.billing }}</span>
             </td>
 
             <!-- 👉 Status -->
@@ -264,7 +270,7 @@ const paginationData = computed(() => {
                 size="small"
                 class="text-capitalize"
               >
-                {{ user.status }}
+                open
               </VChip>
             </td>
 
@@ -281,45 +287,8 @@ const paginationData = computed(() => {
               >
                 <VIcon
                   size="22"
-                  icon="tabler-edit"
+                  icon="tabler-user-circle"
                 />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-trash"
-                />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-dots-vertical"
-                />
-
-                <VMenu activator="parent">
-                  <VList>
-                    <VListItem
-                      title="View"
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                    />
-                    <VListItem
-                      title="Suspend"
-                      href="javascript:void(0)"
-                    />
-                  </VList>
-                </VMenu>
               </VBtn>
             </td>
           </tr>

@@ -2,7 +2,7 @@
 import PendingPaymentsList from '@/views/paypoint/PendingPaymentsList.vue'
 
 const currentTab = ref(0)
-const tabs = ["Today's Appointments"]
+const tabs = ["Pending Payments"]
 
 const tabItemContent = [PendingPaymentsList]
 </script>

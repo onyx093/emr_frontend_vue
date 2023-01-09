@@ -178,19 +178,25 @@ const paginationData = computed(() => {
         <thead>
           <tr>
             <th scope="col">
-              USER
+              DATE
             </th>
             <th scope="col">
-              ROLE
+              PATIENT
             </th>
             <th scope="col">
-              PLAN
+              DEPARTMENT
             </th>
             <th scope="col">
-              BILLING
+              REASON
             </th>
             <th scope="col">
-              STATUS
+              ACCEPTED
+            </th>
+            <th scope="col">
+              WHOM TO SEE
+            </th>
+            <th scope="col">
+              WAS SCHEDULED
             </th>
             <th scope="col">
               ACTIONS
@@ -204,7 +210,12 @@ const paginationData = computed(() => {
             :key="user.id"
             style="height: 3.75rem;"
           >
-            <!-- 👉 User -->
+            <!-- 👉 ID -->
+            <td>
+              <span class="text-base">{{ new Date().toLocaleString() }}</span>
+            </td>
+
+            <!-- 👉 Patient -->
             <td>
               <div class="d-flex align-center">
                 <VAvatar
@@ -234,29 +245,38 @@ const paginationData = computed(() => {
               </div>
             </td>
 
-            <!-- 👉 Role -->
+            <!-- 👉 Department -->
             <td>
-              <VAvatar
-                :color="resolveUserRoleVariant(user.role).color"
-                :icon="resolveUserRoleVariant(user.role).icon"
-                variant="tonal"
-                size="30"
-                class="me-4"
+              <span class="text-base">Family Medicine/GOPD (Follow Up)</span>
+            </td>
+
+            <!-- 👉 Reason -->
+            <td>
+              <span class="text-base">For circumcision</span>
+            </td>
+
+            <!-- 👉 Accepted -->
+            <td>
+              <VBtn
+                size="small"
+                color="primary"
+                variant="flat"
+                class="mr-2"
+              >
+                Open Profile
+              </VBtn>
+              <VIcon
+                size="22"
+                icon="tabler-volume"
               />
-              <span class="text-capitalize text-base">{{ user.role }}</span>
             </td>
 
-            <!-- 👉 Plan -->
+            <!-- 👉 Whom To See -->
             <td>
-              <span class="text-capitalize text-base font-weight-semibold">{{ user.currentPlan }}</span>
+              <span class="text-base">Room 3 (Ikechukwu Anosike)</span>
             </td>
 
-            <!-- 👉 Billing -->
-            <td>
-              <span class="text-base">{{ user.billing }}</span>
-            </td>
-
-            <!-- 👉 Status -->
+            <!-- 👉 Was Scheduled -->
             <td>
               <VChip
                 label
@@ -281,45 +301,8 @@ const paginationData = computed(() => {
               >
                 <VIcon
                   size="22"
-                  icon="tabler-edit"
+                  icon="tabler-eye"
                 />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-trash"
-                />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-dots-vertical"
-                />
-
-                <VMenu activator="parent">
-                  <VList>
-                    <VListItem
-                      title="View"
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                    />
-                    <VListItem
-                      title="Suspend"
-                      href="javascript:void(0)"
-                    />
-                  </VList>
-                </VMenu>
               </VBtn>
             </td>
           </tr>

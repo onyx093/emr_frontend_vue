@@ -178,19 +178,22 @@ const paginationData = computed(() => {
         <thead>
           <tr>
             <th scope="col">
-              USER
+              DATE REGISTERED
             </th>
             <th scope="col">
-              ROLE
+              PATIENT NAME
             </th>
             <th scope="col">
-              PLAN
+              PATIENT ID
             </th>
             <th scope="col">
-              BILLING
+              PHONE NUMBER
             </th>
             <th scope="col">
-              STATUS
+              SCHEME
+            </th>
+            <th scope="col">
+              BALANCE
             </th>
             <th scope="col">
               ACTIONS
@@ -204,7 +207,12 @@ const paginationData = computed(() => {
             :key="user.id"
             style="height: 3.75rem;"
           >
-            <!-- 👉 User -->
+            <!-- 👉 Date Registered -->
+            <td>
+              <span class="text-capitalize text-base">{{ new Date().toLocaleString() }}</span>
+            </td>
+
+            <!-- 👉 Patient Name -->
             <td>
               <div class="d-flex align-center">
                 <VAvatar
@@ -234,29 +242,17 @@ const paginationData = computed(() => {
               </div>
             </td>
 
-            <!-- 👉 Role -->
+            <!-- 👉 Patient ID -->
             <td>
-              <VAvatar
-                :color="resolveUserRoleVariant(user.role).color"
-                :icon="resolveUserRoleVariant(user.role).icon"
-                variant="tonal"
-                size="30"
-                class="me-4"
-              />
-              <span class="text-capitalize text-base">{{ user.role }}</span>
+              <span class="text-capitalize text-base font-weight-semibold">00015139</span>
             </td>
 
-            <!-- 👉 Plan -->
+            <!-- 👉 Phone Number -->
             <td>
-              <span class="text-capitalize text-base font-weight-semibold">{{ user.currentPlan }}</span>
+              <span class="text-base">07065230934</span>
             </td>
 
-            <!-- 👉 Billing -->
-            <td>
-              <span class="text-base">{{ user.billing }}</span>
-            </td>
-
-            <!-- 👉 Status -->
+            <!-- 👉 Scheme -->
             <td>
               <VChip
                 label
@@ -266,6 +262,11 @@ const paginationData = computed(() => {
               >
                 {{ user.status }}
               </VChip>
+            </td>
+
+            <!-- Balance -->
+            <td>
+              <span class="text-base">&#x20A6; 5000.00</span>
             </td>
 
             <!-- 👉 Actions -->
@@ -281,45 +282,8 @@ const paginationData = computed(() => {
               >
                 <VIcon
                   size="22"
-                  icon="tabler-edit"
+                  icon="tabler-user-circle"
                 />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-trash"
-                />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-dots-vertical"
-                />
-
-                <VMenu activator="parent">
-                  <VList>
-                    <VListItem
-                      title="View"
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                    />
-                    <VListItem
-                      title="Suspend"
-                      href="javascript:void(0)"
-                    />
-                  </VList>
-                </VMenu>
               </VBtn>
             </td>
           </tr>

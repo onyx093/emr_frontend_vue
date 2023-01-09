@@ -1,11 +1,11 @@
 <!-- eslint-disable import/newline-after-import -->
 <script setup>
-import EnrolledAntenatalPatientList from '@/views/doctor/EnrolledAntenatalPatientList.vue'
+import LabourManagementList from '@/views/doctor/LabourManagementList.vue'
 
 const currentTab = ref(0)
 const tabs = ["Labouor Management(Dashboard)"]
 
-const tabItemContent = [EnrolledAntenatalPatientList]
+const tabItemContent = [LabourManagementList]
 </script>
 
 <template>

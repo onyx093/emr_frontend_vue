@@ -14,8 +14,6 @@ const totalPage = ref(1)
 const totalUsers = ref(0)
 const users = ref([])
 
-const dateRange = ref('')
-
 // 👉 Fetching users
 const fetchUsers = () => {
   userListStore.fetchUsers({
@@ -124,16 +122,16 @@ const paginationData = computed(() => {
         <thead>
           <tr>
             <th scope="col">
-              USER
+              S/N
             </th>
             <th scope="col">
-              ROLE
+              PERFORMANCE PERIOD
             </th>
             <th scope="col">
-              PLAN
+              START DATE
             </th>
             <th scope="col">
-              BILLING
+              END DATE
             </th>
             <th scope="col">
               STATUS
@@ -150,56 +148,24 @@ const paginationData = computed(() => {
             :key="user.id"
             style="height: 3.75rem;"
           >
-            <!-- 👉 User -->
+            <!-- 👉 S/N -->
             <td>
-              <div class="d-flex align-center">
-                <VAvatar
-                  variant="tonal"
-                  :color="resolveUserRoleVariant(user.role).color"
-                  class="me-3"
-                  size="38"
-                >
-                  <VImg
-                    v-if="user.avatar"
-                    :src="user.avatar"
-                  />
-                  <span v-else>{{ avatarText(user.fullName) }}</span>
-                </VAvatar>
-
-                <div class="d-flex flex-column">
-                  <h6 class="text-base">
-                    <RouterLink
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                      class="font-weight-medium user-list-name"
-                    >
-                      {{ user.fullName }}
-                    </RouterLink>
-                  </h6>
-                  <span class="text-sm text-disabled">@{{ user.email }}</span>
-                </div>
-              </div>
+              <span class="text-base">1</span>
             </td>
 
-            <!-- 👉 Role -->
+            <!-- 👉 Performance Period -->
             <td>
-              <VAvatar
-                :color="resolveUserRoleVariant(user.role).color"
-                :icon="resolveUserRoleVariant(user.role).icon"
-                variant="tonal"
-                size="30"
-                class="me-4"
-              />
-              <span class="text-capitalize text-base">{{ user.role }}</span>
+              <span class="text-base">First Quarter</span>
             </td>
 
-            <!-- 👉 Plan -->
+            <!-- 👉 Start Date -->
             <td>
-              <span class="text-capitalize text-base font-weight-semibold">{{ user.currentPlan }}</span>
+              <span class="text-base">{{ new Date().toLocaleString() }}</span>
             </td>
 
-            <!-- 👉 Billing -->
+            <!-- 👉 End Date -->
             <td>
-              <span class="text-base">{{ user.billing }}</span>
+              <span class="text-base">{{ new Date().toLocaleString() }}</span>
             </td>
 
             <!-- 👉 Status -->
@@ -239,7 +205,7 @@ const paginationData = computed(() => {
               >
                 <VIcon
                   size="22"
-                  icon="tabler-trash"
+                  icon="tabler-folder"
                 />
               </VBtn>
 
@@ -251,21 +217,8 @@ const paginationData = computed(() => {
               >
                 <VIcon
                   size="22"
-                  icon="tabler-dots-vertical"
+                  icon="tabler-circle-x"
                 />
-
-                <VMenu activator="parent">
-                  <VList>
-                    <VListItem
-                      title="View"
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                    />
-                    <VListItem
-                      title="Suspend"
-                      href="javascript:void(0)"
-                    />
-                  </VList>
-                </VMenu>
               </VBtn>
             </td>
           </tr>

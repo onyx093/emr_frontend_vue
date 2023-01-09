@@ -13,8 +13,6 @@ const totalPage = ref(1)
 const totalUsers = ref(0)
 const users = ref([])
 
-const dateRange = ref('')
-
 // 👉 Fetching users
 const fetchUsers = () => {
   userListStore.fetchUsers({
@@ -108,19 +106,25 @@ const paginationData = computed(() => {
         <thead>
           <tr>
             <th scope="col">
-              USER
+              REQUEST DATE
             </th>
             <th scope="col">
-              ROLE
+              ID
             </th>
             <th scope="col">
-              PLAN
+              PATIENT
             </th>
             <th scope="col">
-              BILLING
+              INSURANCE
             </th>
             <th scope="col">
-              STATUS
+              REQUESTED BY
+            </th>
+            <th scope="col">
+              FILLED BY
+            </th>
+            <th scope="col">
+              REQUEST STATUS
             </th>
             <th scope="col">
               ACTIONS
@@ -134,14 +138,24 @@ const paginationData = computed(() => {
             :key="user.id"
             style="height: 3.75rem;"
           >
-            <!-- 👉 User -->
+            <!-- 👉 Request Date -->
+            <td>
+              <span class="text-base">{{ new Date().toLocaleString() }}</span>
+            </td>
+
+            <!-- 👉 ID -->
+            <td>
+              <span class="text-base">DR23/01/46572</span>
+            </td>
+
+            <!-- 👉 Patient -->
             <td>
               <div class="d-flex align-center">
                 <VAvatar
                   variant="tonal"
                   :color="resolveUserRoleVariant(user.role).color"
                   class="me-3"
-                  size="38"
+                  size="28"
                 >
                   <VImg
                     v-if="user.avatar"
@@ -164,29 +178,22 @@ const paginationData = computed(() => {
               </div>
             </td>
 
-            <!-- 👉 Role -->
+            <!-- 👉 Insurance -->
             <td>
-              <VAvatar
-                :color="resolveUserRoleVariant(user.role).color"
-                :icon="resolveUserRoleVariant(user.role).icon"
-                variant="tonal"
-                size="30"
-                class="me-4"
-              />
-              <span class="text-capitalize text-base">{{ user.role }}</span>
+              <span class="text-capitalize text-base">AXAMANSARD</span>
             </td>
 
-            <!-- 👉 Plan -->
+            <!-- 👉 Requested By -->
             <td>
-              <span class="text-capitalize text-base font-weight-semibold">{{ user.currentPlan }}</span>
+              <span class="text-capitalize text-base font-weight-semibold">Dr. Joshua</span>
             </td>
 
-            <!-- 👉 Billing -->
+            <!-- 👉 Filled By -->
             <td>
-              <span class="text-base">{{ user.billing }}</span>
+              <span class="text-base">G. Tukura</span>
             </td>
 
-            <!-- 👉 Status -->
+            <!-- 👉 Request Status -->
             <td>
               <VChip
                 label
@@ -211,7 +218,7 @@ const paginationData = computed(() => {
               >
                 <VIcon
                   size="22"
-                  icon="tabler-edit"
+                  icon="tabler-eye"
                 />
               </VBtn>
 
@@ -223,33 +230,8 @@ const paginationData = computed(() => {
               >
                 <VIcon
                   size="22"
-                  icon="tabler-trash"
+                  icon="tabler-printer"
                 />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-dots-vertical"
-                />
-
-                <VMenu activator="parent">
-                  <VList>
-                    <VListItem
-                      title="View"
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                    />
-                    <VListItem
-                      title="Suspend"
-                      href="javascript:void(0)"
-                    />
-                  </VList>
-                </VMenu>
               </VBtn>
             </td>
           </tr>

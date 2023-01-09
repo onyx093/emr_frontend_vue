@@ -167,22 +167,19 @@ const paginationData = computed(() => {
         <thead>
           <tr>
             <th scope="col">
-              USER
+              STAFF ID
             </th>
             <th scope="col">
-              ROLE
+              STAFF NAME
             </th>
             <th scope="col">
-              PLAN
+              DEPARTMENT
             </th>
             <th scope="col">
-              BILLING
+              TIME
             </th>
             <th scope="col">
-              STATUS
-            </th>
-            <th scope="col">
-              ACTIONS
+              DATE
             </th>
           </tr>
         </thead>
@@ -193,7 +190,12 @@ const paginationData = computed(() => {
             :key="user.id"
             style="height: 3.75rem;"
           >
-            <!-- 👉 User -->
+            <!-- 👉 Staff ID -->
+            <td>
+              <span class="text-capitalize text-base">{{ user.id }}</span>
+            </td>
+
+            <!-- 👉 Staff Name -->
             <td>
               <div class="d-flex align-center">
                 <VAvatar
@@ -223,93 +225,19 @@ const paginationData = computed(() => {
               </div>
             </td>
 
-            <!-- 👉 Role -->
+            <!-- 👉 Department -->
             <td>
-              <VAvatar
-                :color="resolveUserRoleVariant(user.role).color"
-                :icon="resolveUserRoleVariant(user.role).icon"
-                variant="tonal"
-                size="30"
-                class="me-4"
-              />
-              <span class="text-capitalize text-base">{{ user.role }}</span>
+              <span class="text-capitalize text-base font-weight-semibold">--</span>
             </td>
 
-            <!-- 👉 Plan -->
+            <!-- 👉 Time -->
             <td>
-              <span class="text-capitalize text-base font-weight-semibold">{{ user.currentPlan }}</span>
+              <span class="text-base">{{ new Date().toTimeString() }}</span>
             </td>
 
-            <!-- 👉 Billing -->
+            <!-- 👉 Date -->
             <td>
-              <span class="text-base">{{ user.billing }}</span>
-            </td>
-
-            <!-- 👉 Status -->
-            <td>
-              <VChip
-                label
-                :color="resolveUserStatusVariant(user.status)"
-                size="small"
-                class="text-capitalize"
-              >
-                {{ user.status }}
-              </VChip>
-            </td>
-
-            <!-- 👉 Actions -->
-            <td
-              class="text-center"
-              style="width: 5rem;"
-            >
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-edit"
-                />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-trash"
-                />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-dots-vertical"
-                />
-
-                <VMenu activator="parent">
-                  <VList>
-                    <VListItem
-                      title="View"
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                    />
-                    <VListItem
-                      title="Suspend"
-                      href="javascript:void(0)"
-                    />
-                  </VList>
-                </VMenu>
-              </VBtn>
+              <span class="text-base">{{ new Date().toDateString() }}</span>
             </td>
           </tr>
         </tbody>

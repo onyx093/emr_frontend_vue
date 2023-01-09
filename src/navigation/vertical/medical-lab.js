@@ -6,7 +6,7 @@ export default [
     to: 'medical-lab-dashboard',
   },
   {
-    title: 'Lab Request',
+    title: 'Lab Requests',
     icon: { icon: 'tabler-message' },
     to: 'medical-lab-request-list',
   },

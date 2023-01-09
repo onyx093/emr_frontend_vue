@@ -1,7 +1,7 @@
 <script setup>
 import { useUserListStore } from '@/views/apps/user/useUserListStore'
-import { avatarText } from '@core/utils/formatters'
 import AppDateTimePicker from '@core/components/AppDateTimePicker.vue'
+import { avatarText } from '@core/utils/formatters'
 
 const userListStore = useUserListStore()
 const searchQuery = ref('')
@@ -151,16 +151,19 @@ const paginationData = computed(() => {
         <thead>
           <tr>
             <th scope="col">
-              USER
+              PATIENT NAME
             </th>
             <th scope="col">
-              ROLE
+              REASON
             </th>
             <th scope="col">
-              PLAN
+              ADMISSION
             </th>
             <th scope="col">
-              BILLING
+              BY
+            </th>
+            <th scope="col">
+              ROOM/FLOOR
             </th>
             <th scope="col">
               STATUS
@@ -177,7 +180,7 @@ const paginationData = computed(() => {
             :key="user.id"
             style="height: 3.75rem;"
           >
-            <!-- 👉 User -->
+            <!-- 👉 Patient Name -->
             <td>
               <div class="d-flex align-center">
                 <VAvatar
@@ -207,29 +210,27 @@ const paginationData = computed(() => {
               </div>
             </td>
 
-            <!-- 👉 Role -->
+            <!-- 👉 Reason -->
             <td>
-              <VAvatar
-                :color="resolveUserRoleVariant(user.role).color"
-                :icon="resolveUserRoleVariant(user.role).icon"
-                variant="tonal"
-                size="30"
-                class="me-4"
-              />
-              <span class="text-capitalize text-base">{{ user.role }}</span>
+              <span class="text-capitalize text-base">Resistant Malaria</span>
             </td>
 
-            <!-- 👉 Plan -->
+            <!-- 👉 Admission -->
             <td>
-              <span class="text-capitalize text-base font-weight-semibold">{{ user.currentPlan }}</span>
+              <span class="text-capitalize text-base font-weight-semibold">{{ new Date().toLocaleString() }}</span>
             </td>
 
-            <!-- 👉 Billing -->
+            <!-- 👉 By -->
             <td>
-              <span class="text-base">{{ user.billing }}</span>
+              <span class="text-base">Stephen Ajani</span>
             </td>
 
-            <!-- 👉 Status -->
+            <!-- 👉 Room/Floor -->
+            <td>
+              <span class="text-base">Room 15 / 2nd Floor </span>
+            </td>
+
+            <!-- Status -->
             <td>
               <VChip
                 label
@@ -254,45 +255,8 @@ const paginationData = computed(() => {
               >
                 <VIcon
                   size="22"
-                  icon="tabler-edit"
+                  icon="tabler-user-circle"
                 />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-trash"
-                />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-dots-vertical"
-                />
-
-                <VMenu activator="parent">
-                  <VList>
-                    <VListItem
-                      title="View"
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                    />
-                    <VListItem
-                      title="Suspend"
-                      href="javascript:void(0)"
-                    />
-                  </VList>
-                </VMenu>
               </VBtn>
             </td>
           </tr>

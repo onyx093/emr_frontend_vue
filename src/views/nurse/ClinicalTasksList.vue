@@ -13,8 +13,6 @@ const totalPage = ref(1)
 const totalUsers = ref(0)
 const users = ref([])
 
-const dateRange = ref('')
-
 // 👉 Fetching users
 const fetchUsers = () => {
   userListStore.fetchUsers({
@@ -108,19 +106,31 @@ const paginationData = computed(() => {
         <thead>
           <tr>
             <th scope="col">
-              USER
+              PATIENT
             </th>
             <th scope="col">
-              ROLE
+              BED/WARD
             </th>
             <th scope="col">
-              PLAN
+              TASK
             </th>
             <th scope="col">
-              BILLING
+              SET ON
             </th>
             <th scope="col">
-              STATUS
+              LAST READ
+            </th>
+            <th scope="col">
+              NEXT DUE
+            </th>
+            <th scope="col">
+              READ COUNT
+            </th>
+            <th scope="col">
+              LAST READING
+            </th>
+            <th scope="col">
+              TAKE READING
             </th>
             <th scope="col">
               ACTIONS
@@ -134,7 +144,7 @@ const paginationData = computed(() => {
             :key="user.id"
             style="height: 3.75rem;"
           >
-            <!-- 👉 User -->
+            <!-- 👉 Patient -->
             <td>
               <div class="d-flex align-center">
                 <VAvatar
@@ -164,7 +174,7 @@ const paginationData = computed(() => {
               </div>
             </td>
 
-            <!-- 👉 Role -->
+            <!-- 👉 Bed/Ward -->
             <td>
               <VAvatar
                 :color="resolveUserRoleVariant(user.role).color"
@@ -176,26 +186,51 @@ const paginationData = computed(() => {
               <span class="text-capitalize text-base">{{ user.role }}</span>
             </td>
 
-            <!-- 👉 Plan -->
+            <!-- 👉 Task -->
             <td>
               <span class="text-capitalize text-base font-weight-semibold">{{ user.currentPlan }}</span>
             </td>
 
-            <!-- 👉 Billing -->
+            <!-- 👉 Set On -->
             <td>
-              <span class="text-base">{{ user.billing }}</span>
+              <span class="text-base">{{ new Date().toLocaleString() }}</span>
             </td>
 
-            <!-- 👉 Status -->
+            <!-- 👉 Last Read -->
             <td>
-              <VChip
-                label
-                :color="resolveUserStatusVariant(user.status)"
+              <span class="text-base">200</span>
+            </td>
+
+            <!-- 👉 Next Due -->
+            <td class="align-center">
+              <VIcon
+                size="22"
+                icon="tabler-alert-triangle"
+                color="error"
+              />
+              <span class="text-base">A year ago</span>
+            </td>
+
+            <!-- 👉 Read Count -->
+            <td>
+              <span class="text-base">1/6</span>
+            </td>
+
+            <!-- 👉 Last Reading -->
+            <td>
+              <span class="text-base">A year ago by third nurse</span>
+            </td>
+
+            <!-- 👉 Take Reading -->
+            <td>
+              <VBtn
                 size="small"
-                class="text-capitalize"
+                color="primary"
+                variant="flat"
+                rounded="sm"
               >
-                {{ user.status }}
-              </VChip>
+                Take Reading
+              </VBtn>
             </td>
 
             <!-- 👉 Actions -->
@@ -211,45 +246,8 @@ const paginationData = computed(() => {
               >
                 <VIcon
                   size="22"
-                  icon="tabler-edit"
-                />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
                   icon="tabler-trash"
                 />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-dots-vertical"
-                />
-
-                <VMenu activator="parent">
-                  <VList>
-                    <VListItem
-                      title="View"
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                    />
-                    <VListItem
-                      title="Suspend"
-                      href="javascript:void(0)"
-                    />
-                  </VList>
-                </VMenu>
               </VBtn>
             </td>
           </tr>
