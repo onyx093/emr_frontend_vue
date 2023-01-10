@@ -178,22 +178,34 @@ const paginationData = computed(() => {
         <thead>
           <tr>
             <th scope="col">
-              USER
+              PATIENT NAME
             </th>
             <th scope="col">
-              ROLE
+              ID
             </th>
             <th scope="col">
-              PLAN
+              HMO
             </th>
             <th scope="col">
-              BILLING
+              REQUEST DATE
             </th>
             <th scope="col">
-              STATUS
+              TEST NAME
             </th>
             <th scope="col">
-              ACTIONS
+              SPECIMEN
+            </th>
+            <th scope="col">
+              FILLED DATE
+            </th>
+            <th scope="col">
+              AMOUNT
+            </th>
+            <th scope="col">
+              REQUESTED BY
+            </th>
+            <th scope="col">
+              LAB ATTENDANT
             </th>
           </tr>
         </thead>
@@ -204,123 +216,54 @@ const paginationData = computed(() => {
             :key="user.id"
             style="height: 3.75rem;"
           >
-            <!-- 👉 User -->
+            <!-- 👉 Patient Name -->
             <td>
-              <div class="d-flex align-center">
-                <VAvatar
-                  variant="tonal"
-                  :color="resolveUserRoleVariant(user.role).color"
-                  class="me-3"
-                  size="38"
-                >
-                  <VImg
-                    v-if="user.avatar"
-                    :src="user.avatar"
-                  />
-                  <span v-else>{{ avatarText(user.fullName) }}</span>
-                </VAvatar>
-
-                <div class="d-flex flex-column">
-                  <h6 class="text-base">
-                    <RouterLink
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                      class="font-weight-medium user-list-name"
-                    >
-                      {{ user.fullName }}
-                    </RouterLink>
-                  </h6>
-                  <span class="text-sm text-disabled">@{{ user.email }}</span>
-                </div>
-              </div>
+              <span class="text-base">Baby Mohammed</span>
             </td>
 
-            <!-- 👉 Role -->
+            <!-- 👉 ID -->
             <td>
-              <VAvatar
-                :color="resolveUserRoleVariant(user.role).color"
-                :icon="resolveUserRoleVariant(user.role).icon"
-                variant="tonal"
-                size="30"
-                class="me-4"
-              />
-              <span class="text-capitalize text-base">{{ user.role }}</span>
+              <span class="text-base">15200</span>
             </td>
 
-            <!-- 👉 Plan -->
+            <!-- 👉 HMO -->
             <td>
-              <span class="text-capitalize text-base font-weight-semibold">{{ user.currentPlan }}</span>
+              <span class="text-base">CBN</span>
             </td>
 
-            <!-- 👉 Billing -->
+            <!-- 👉 Request Date -->
             <td>
-              <span class="text-base">{{ user.billing }}</span>
+              <span class="text-base">{{ new Date().toLocaleString() }}</span>
             </td>
 
-            <!-- 👉 Status -->
+            <!-- 👉 Test Name -->
             <td>
-              <VChip
-                label
-                :color="resolveUserStatusVariant(user.status)"
-                size="small"
-                class="text-capitalize"
-              >
-                {{ user.status }}
-              </VChip>
+              <span class="text-base">Blood Group</span>
             </td>
 
-            <!-- 👉 Actions -->
-            <td
-              class="text-center"
-              style="width: 5rem;"
-            >
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-edit"
-                />
-              </VBtn>
+            <!-- 👉 Specimen -->
+            <td>
+              <span class="text-base">Blood</span>
+            </td>
 
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-trash"
-                />
-              </VBtn>
+            <!-- 👉 Filled Date -->
+            <td>
+              <span class="text-base">{{ new Date().toLocaleString() }}</span>
+            </td>
 
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-dots-vertical"
-                />
+            <!-- 👉 Amount -->
+            <td>
+              <span class="text-base">&#x20A6;2000</span>
+            </td>
 
-                <VMenu activator="parent">
-                  <VList>
-                    <VListItem
-                      title="View"
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                    />
-                    <VListItem
-                      title="Suspend"
-                      href="javascript:void(0)"
-                    />
-                  </VList>
-                </VMenu>
-              </VBtn>
+            <!-- 👉 Requested By -->
+            <td>
+              <span class="text-base">Okoro Matthew</span>
+            </td>
+
+            <!-- 👉 Lab Attendant -->
+            <td>
+              <span class="text-base">--</span>
             </td>
           </tr>
         </tbody>

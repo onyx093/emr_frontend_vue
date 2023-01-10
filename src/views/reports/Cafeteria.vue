@@ -214,22 +214,31 @@ const paginationData = computed(() => {
         <thead>
           <tr>
             <th scope="col">
-              USER
+              CUSTOMER NAME
             </th>
             <th scope="col">
-              ROLE
+              HMO
             </th>
             <th scope="col">
-              PLAN
+              ITEM
             </th>
             <th scope="col">
-              BILLING
+              DATE
             </th>
             <th scope="col">
-              STATUS
+              QUANTITY
             </th>
             <th scope="col">
-              ACTIONS
+              TOTAL PRICE
+            </th>
+            <th scope="col">
+              AMOUNT PAID
+            </th>
+            <th scope="col">
+              PAYMENT METHOD
+            </th>
+            <th scope="col">
+              CREDIT
             </th>
           </tr>
         </thead>
@@ -240,59 +249,47 @@ const paginationData = computed(() => {
             :key="user.id"
             style="height: 3.75rem;"
           >
-            <!-- 👉 User -->
+            <!-- 👉 Customer Name -->
             <td>
-              <div class="d-flex align-center">
-                <VAvatar
-                  variant="tonal"
-                  :color="resolveUserRoleVariant(user.role).color"
-                  class="me-3"
-                  size="38"
-                >
-                  <VImg
-                    v-if="user.avatar"
-                    :src="user.avatar"
-                  />
-                  <span v-else>{{ avatarText(user.fullName) }}</span>
-                </VAvatar>
-
-                <div class="d-flex flex-column">
-                  <h6 class="text-base">
-                    <RouterLink
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                      class="font-weight-medium user-list-name"
-                    >
-                      {{ user.fullName }}
-                    </RouterLink>
-                  </h6>
-                  <span class="text-sm text-disabled">@{{ user.email }}</span>
-                </div>
-              </div>
+              <span class="text-base">Chidinma F Amadi (00013500)</span>
             </td>
 
-            <!-- 👉 Role -->
+            <!-- 👉 HMO -->
             <td>
-              <VAvatar
-                :color="resolveUserRoleVariant(user.role).color"
-                :icon="resolveUserRoleVariant(user.role).icon"
-                variant="tonal"
-                size="30"
-                class="me-4"
-              />
-              <span class="text-capitalize text-base">{{ user.role }}</span>
+              <span class="text-base">STAFF</span>
             </td>
 
-            <!-- 👉 Plan -->
+            <!-- 👉 Item -->
             <td>
-              <span class="text-capitalize text-base font-weight-semibold">{{ user.currentPlan }}</span>
+              <span class="text-base">Mirinda (Staff)</span>
             </td>
 
-            <!-- 👉 Billing -->
+            <!-- 👉 Date -->
             <td>
               <span class="text-base">{{ user.billing }}</span>
             </td>
 
-            <!-- 👉 Status -->
+            <!-- 👉 Quantity -->
+            <td>
+              <span class="text-base">1</span>
+            </td>
+
+            <!-- 👉 Total Price -->
+            <td>
+              <span class="text-base">&#x20A6;150.00</span>
+            </td>
+
+            <!-- 👉 Amount Paid -->
+            <td>
+              <span class="text-base">&#x20A6;150.00</span>
+            </td>
+
+            <!-- 👉 Payment Method -->
+            <td>
+              <span class="text-base">SANTE BISTRO CASH</span>
+            </td>
+
+            <!-- 👉 Credit -->
             <td>
               <VChip
                 label
@@ -302,61 +299,6 @@ const paginationData = computed(() => {
               >
                 {{ user.status }}
               </VChip>
-            </td>
-
-            <!-- 👉 Actions -->
-            <td
-              class="text-center"
-              style="width: 5rem;"
-            >
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-edit"
-                />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-trash"
-                />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-dots-vertical"
-                />
-
-                <VMenu activator="parent">
-                  <VList>
-                    <VListItem
-                      title="View"
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                    />
-                    <VListItem
-                      title="Suspend"
-                      href="javascript:void(0)"
-                    />
-                  </VList>
-                </VMenu>
-              </VBtn>
             </td>
           </tr>
         </tbody>

@@ -178,22 +178,13 @@ const paginationData = computed(() => {
         <thead>
           <tr>
             <th scope="col">
-              USER
+              BRAND NAME
             </th>
             <th scope="col">
-              ROLE
+              GENERIC NAME
             </th>
             <th scope="col">
-              PLAN
-            </th>
-            <th scope="col">
-              BILLING
-            </th>
-            <th scope="col">
-              STATUS
-            </th>
-            <th scope="col">
-              ACTIONS
+              QUANTITY DISPENSED
             </th>
           </tr>
         </thead>
@@ -204,7 +195,7 @@ const paginationData = computed(() => {
             :key="user.id"
             style="height: 3.75rem;"
           >
-            <!-- 👉 User -->
+            <!-- 👉 Brand Name -->
             <td>
               <div class="d-flex align-center">
                 <VAvatar
@@ -234,93 +225,14 @@ const paginationData = computed(() => {
               </div>
             </td>
 
-            <!-- 👉 Role -->
+            <!-- 👉 Generic Name -->
             <td>
-              <VAvatar
-                :color="resolveUserRoleVariant(user.role).color"
-                :icon="resolveUserRoleVariant(user.role).icon"
-                variant="tonal"
-                size="30"
-                class="me-4"
-              />
               <span class="text-capitalize text-base">{{ user.role }}</span>
             </td>
 
-            <!-- 👉 Plan -->
+            <!-- 👉 Quantity Dispensed -->
             <td>
               <span class="text-capitalize text-base font-weight-semibold">{{ user.currentPlan }}</span>
-            </td>
-
-            <!-- 👉 Billing -->
-            <td>
-              <span class="text-base">{{ user.billing }}</span>
-            </td>
-
-            <!-- 👉 Status -->
-            <td>
-              <VChip
-                label
-                :color="resolveUserStatusVariant(user.status)"
-                size="small"
-                class="text-capitalize"
-              >
-                {{ user.status }}
-              </VChip>
-            </td>
-
-            <!-- 👉 Actions -->
-            <td
-              class="text-center"
-              style="width: 5rem;"
-            >
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-edit"
-                />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-trash"
-                />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-dots-vertical"
-                />
-
-                <VMenu activator="parent">
-                  <VList>
-                    <VListItem
-                      title="View"
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                    />
-                    <VListItem
-                      title="Suspend"
-                      href="javascript:void(0)"
-                    />
-                  </VList>
-                </VMenu>
-              </VBtn>
             </td>
           </tr>
         </tbody>

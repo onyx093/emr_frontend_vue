@@ -13,8 +13,6 @@ const totalPage = ref(1)
 const totalUsers = ref(0)
 const users = ref([])
 
-const dateRange = ref('')
-
 // 👉 Fetching users
 const fetchUsers = () => {
   userListStore.fetchUsers({
@@ -108,19 +106,31 @@ const paginationData = computed(() => {
         <thead>
           <tr>
             <th scope="col">
-              USER
+              S/N
             </th>
             <th scope="col">
-              ROLE
+              HMO COMPANY
             </th>
             <th scope="col">
-              PLAN
+              SCHEME
             </th>
             <th scope="col">
-              BILLING
+              TYPE
             </th>
             <th scope="col">
-              STATUS
+              PHONE
+            </th>
+            <th scope="col">
+              EMAIL
+            </th>
+            <th scope="col">
+              CAC NUMBER
+            </th>
+            <th scope="col">
+              COVERAGE
+            </th>
+            <th scope="col">
+              PATIENT
             </th>
             <th scope="col">
               ACTIONS
@@ -134,68 +144,49 @@ const paginationData = computed(() => {
             :key="user.id"
             style="height: 3.75rem;"
           >
-            <!-- 👉 User -->
+            <!-- 👉 S/N -->
             <td>
-              <div class="d-flex align-center">
-                <VAvatar
-                  variant="tonal"
-                  :color="resolveUserRoleVariant(user.role).color"
-                  class="me-3"
-                  size="38"
-                >
-                  <VImg
-                    v-if="user.avatar"
-                    :src="user.avatar"
-                  />
-                  <span v-else>{{ avatarText(user.fullName) }}</span>
-                </VAvatar>
-
-                <div class="d-flex flex-column">
-                  <h6 class="text-base">
-                    <RouterLink
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                      class="font-weight-medium user-list-name"
-                    >
-                      {{ user.fullName }}
-                    </RouterLink>
-                  </h6>
-                  <span class="text-sm text-disabled">@{{ user.email }}</span>
-                </div>
-              </div>
+              <span class="text-base">{{ user.id }}</span>
             </td>
 
-            <!-- 👉 Role -->
+            <!-- 👉 HMO Company -->
             <td>
-              <VAvatar
-                :color="resolveUserRoleVariant(user.role).color"
-                :icon="resolveUserRoleVariant(user.role).icon"
-                variant="tonal"
-                size="30"
-                class="me-4"
-              />
-              <span class="text-capitalize text-base">{{ user.role }}</span>
+              <span class="text-base">Deda Hospital</span>
             </td>
 
-            <!-- 👉 Plan -->
+            <!-- 👉 Scheme -->
             <td>
-              <span class="text-capitalize text-base font-weight-semibold">{{ user.currentPlan }}</span>
+              <span class="text-base">GNI2</span>
             </td>
 
-            <!-- 👉 Billing -->
+            <!-- 👉 Type -->
             <td>
-              <span class="text-base">{{ user.billing }}</span>
+              <span class="text-base">PHIS</span>
             </td>
 
-            <!-- 👉 Status -->
+            <!-- 👉 Phone -->
             <td>
-              <VChip
-                label
-                :color="resolveUserStatusVariant(user.status)"
-                size="small"
-                class="text-capitalize"
-              >
-                {{ user.status }}
-              </VChip>
+              <span class="text-base">08067340912</span>
+            </td>
+
+            <!-- 👉 Email -->
+            <td>
+              <span class="text-base">abc@gmail.com</span>
+            </td>
+
+            <!-- 👉 CAC Number -->
+            <td>
+              <span class="text-base">--</span>
+            </td>
+
+            <!-- 👉 Coverage -->
+            <td>
+              <span class="text-base">Full</span>
+            </td>
+
+            <!-- 👉 Patients -->
+            <td>
+              <span class="text-base">0 patients</span>
             </td>
 
             <!-- 👉 Actions -->
@@ -213,43 +204,6 @@ const paginationData = computed(() => {
                   size="22"
                   icon="tabler-edit"
                 />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-trash"
-                />
-              </VBtn>
-
-              <VBtn
-                icon
-                size="x-small"
-                color="default"
-                variant="text"
-              >
-                <VIcon
-                  size="22"
-                  icon="tabler-dots-vertical"
-                />
-
-                <VMenu activator="parent">
-                  <VList>
-                    <VListItem
-                      title="View"
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                    />
-                    <VListItem
-                      title="Suspend"
-                      href="javascript:void(0)"
-                    />
-                  </VList>
-                </VMenu>
               </VBtn>
             </td>
           </tr>

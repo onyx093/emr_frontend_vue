@@ -13,8 +13,6 @@ const totalPage = ref(1)
 const totalUsers = ref(0)
 const users = ref([])
 
-const dateRange = ref('')
-
 // 👉 Fetching users
 const fetchUsers = () => {
   userListStore.fetchUsers({
@@ -118,61 +116,6 @@ const paginationData = computed(() => {
 <template>
   <VCol cols="12">
     <VCard>
-      <!-- 👉 Filters -->
-      <VCardText>
-        <VRow>
-          <!-- 👉 Select ID -->
-          <VCol
-            cols="12"
-            sm="3"
-          >
-            <VSelect
-              v-model="selectedStatus"
-              label="Select Department"
-              :items="status"
-              clearable
-              clear-icon="tabler-x"
-            />
-          </VCol>
-          <VCol
-            cols="12"
-            sm="3"
-          >
-            <VSelect
-              v-model="selectedStatus"
-              label="Select Month"
-              :items="status"
-              clearable
-              clear-icon="tabler-x"
-            />
-          </VCol>
-          <!-- 👉 Select Date Range -->
-          <VCol
-            cols="12"
-            sm="3"
-          >
-            <VSelect
-              v-model="selectedStatus"
-              label="Select Year"
-              :items="status"
-              clearable
-              clear-icon="tabler-x"
-            />
-          </VCol>
-          <VCol
-            cols="12"
-            sm="2"
-          >
-            <VBtn
-              prepend-icon="tabler-search"
-              @click="isAddNewUserDrawerVisible = true"
-            >
-              Filter
-            </VBtn>
-          </VCol>
-        </VRow>
-      </VCardText>
-
       <VDivider />
 
       <VTable class="text-no-wrap">
@@ -180,19 +123,25 @@ const paginationData = computed(() => {
         <thead>
           <tr>
             <th scope="col">
-              USER
+              ID
             </th>
             <th scope="col">
-              ROLE
+              TOTAL ALLOWANCE
             </th>
             <th scope="col">
-              PLAN
+              TOTAL DEDUCTION
             </th>
             <th scope="col">
-              BILLING
+              TOTAL PAID
             </th>
             <th scope="col">
-              STATUS
+              MONTH
+            </th>
+            <th scope="col">
+              YEAR
+            </th>
+            <th scope="col">
+              DATE CREATED
             </th>
             <th scope="col">
               ACTIONS

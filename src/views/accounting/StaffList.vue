@@ -13,8 +13,6 @@ const totalPage = ref(1)
 const totalUsers = ref(0)
 const users = ref([])
 
-const dateRange = ref('')
-
 // 👉 Fetching users
 const fetchUsers = () => {
   userListStore.fetchUsers({
@@ -167,16 +165,19 @@ const paginationData = computed(() => {
         <thead>
           <tr>
             <th scope="col">
-              USER
+              NAME
             </th>
             <th scope="col">
               ROLE
             </th>
             <th scope="col">
-              PLAN
+              PHONE
             </th>
             <th scope="col">
-              BILLING
+              DEPARTMENT
+            </th>
+            <th scope="col">
+              DATE CREATED
             </th>
             <th scope="col">
               STATUS
@@ -193,7 +194,7 @@ const paginationData = computed(() => {
             :key="user.id"
             style="height: 3.75rem;"
           >
-            <!-- 👉 User -->
+            <!-- 👉 Name -->
             <td>
               <div class="d-flex align-center">
                 <VAvatar
@@ -225,24 +226,22 @@ const paginationData = computed(() => {
 
             <!-- 👉 Role -->
             <td>
-              <VAvatar
-                :color="resolveUserRoleVariant(user.role).color"
-                :icon="resolveUserRoleVariant(user.role).icon"
-                variant="tonal"
-                size="30"
-                class="me-4"
-              />
               <span class="text-capitalize text-base">{{ user.role }}</span>
             </td>
 
-            <!-- 👉 Plan -->
+            <!-- 👉 Phone -->
             <td>
-              <span class="text-capitalize text-base font-weight-semibold">{{ user.currentPlan }}</span>
+              <span class="text-base">08067230912</span>
             </td>
 
-            <!-- 👉 Billing -->
+            <!-- 👉 Department -->
             <td>
-              <span class="text-base">{{ user.billing }}</span>
+              <span class="text-base">Nursing</span>
+            </td>
+
+            <!-- 👉 Date Created -->
+            <td>
+              <span class="text-base">{{ new Date().toLocaleString() }}</span>
             </td>
 
             <!-- 👉 Status -->
@@ -282,7 +281,7 @@ const paginationData = computed(() => {
               >
                 <VIcon
                   size="22"
-                  icon="tabler-trash"
+                  icon="tabler-user-circle"
                 />
               </VBtn>
 
@@ -294,21 +293,32 @@ const paginationData = computed(() => {
               >
                 <VIcon
                   size="22"
-                  icon="tabler-dots-vertical"
+                  icon="tabler-businessplan"
                 />
+              </VBtn>
 
-                <VMenu activator="parent">
-                  <VList>
-                    <VListItem
-                      title="View"
-                      :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
-                    />
-                    <VListItem
-                      title="Suspend"
-                      href="javascript:void(0)"
-                    />
-                  </VList>
-                </VMenu>
+              <VBtn
+                icon
+                size="x-small"
+                color="default"
+                variant="text"
+              >
+                <VIcon
+                  size="22"
+                  icon="tabler-refresh"
+                />
+              </VBtn>
+
+              <VBtn
+                icon
+                size="x-small"
+                color="default"
+                variant="text"
+              >
+                <VIcon
+                  size="22"
+                  icon="tabler-circle-x"
+                />
               </VBtn>
             </td>
           </tr>

@@ -1,5 +1,5 @@
 <script setup>
-import Payroll from '@/views/accounting/Payroll.vue'
+import Payroll from '@/views/my-account/PaySlips.vue'
 
 const currentTab = ref(0)
 const tabs = ["Payroll"]
