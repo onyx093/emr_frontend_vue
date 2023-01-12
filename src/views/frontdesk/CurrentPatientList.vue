@@ -2,6 +2,9 @@
 import { useUserListStore } from '@/views/apps/user/useUserListStore'
 import { avatarText } from '@core/utils/formatters'
 
+import { ModalVerticalNavLayout } from '@layouts'
+import navItems from '@/navigation/modal'
+
 const userListStore = useUserListStore()
 const searchQuery = ref('')
 const patientData = ref()
@@ -238,34 +241,38 @@ const paginationData = computed(() => {
 
                       <!-- Dialog Content -->
                       <VCard>
-                        <!-- Toolbar -->
-                        <div>
-                          <VToolbar color="primary">
-                            <VBtn
-                              icon
-                              variant="plain"
-                              @click="isDialogVisible = false"
-                            >
-                              <VIcon
-                                color="white"
-                                icon="tabler-x"
-                              />
-                            </VBtn>
-
-                            <VToolbarTitle>Settings</VToolbarTitle>
-
-                            <VSpacer />
-
-                            <VToolbarItems>
+                        <ModalVerticalNavLayout
+                          :nav-items="navItems"
+                        >
+                          <div>
+                            <VToolbar color="primary">
                               <VBtn
-                                variant="text"
+                                icon
+                                variant="plain"
                                 @click="isDialogVisible = false"
                               >
-                                Save
+                                <VIcon
+                                  color="white"
+                                  icon="tabler-x"
+                                />
                               </VBtn>
-                            </VToolbarItems>
-                          </VToolbar>
-                        </div>
+  
+                              <VToolbarTitle>Settings</VToolbarTitle>
+  
+                              <VSpacer />
+  
+                              <VToolbarItems>
+                                <VBtn
+                                  variant="text"
+                                  @click="isDialogVisible = false"
+                                >
+                                  Save
+                                </VBtn>
+                              </VToolbarItems>
+                            </VToolbar>
+                          </div>
+                        </ModalVerticalNavLayout>
+
 
                         <!-- List -->
                         <VList lines="two">
