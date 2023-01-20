@@ -28,7 +28,9 @@ const tabItemContent = [CurrentPatientList, AllPatientList]
           {{ tab }}
         </VTab>
 
+        
         <div class="w-100 d-flex align-items-end">
+          <VSpacer />
           <VDialog
             v-model="isNewPatientDialogVisible"
             max-width="960"

@@ -1,9 +1,7 @@
 <script setup>
 import { useUserListStore } from '@/views/apps/user/useUserListStore'
 import { avatarText } from '@core/utils/formatters'
-
-import { ModalVerticalNavLayout } from '@layouts'
-import navItems from '@/navigation/modal'
+import axios from '@axios'
 
 const userListStore = useUserListStore()
 const searchQuery = ref('')
@@ -16,6 +14,23 @@ const currentPage = ref(1)
 const totalPage = ref(1)
 const totalUsers = ref(0)
 const users = ref([])
+
+const faqSearchQuery = ref('')
+const faqs = ref([])
+
+const fetchFaqs = () => {
+  return axios.get('/pages/faqs', { params: { q: faqSearchQuery.value } }).then(response => {
+    faqs.value = response.data
+  }).catch(error => {
+    console.error(error)
+  })
+}
+
+const activeTab = ref('Dashboard')
+const activeQuestion = ref(0)
+
+watch(activeTab, () => activeQuestion.value = 0)
+watch(faqSearchQuery, fetchFaqs, { immediate: true })
 
 const isDialogVisible = ref(false)
 
@@ -241,11 +256,12 @@ const paginationData = computed(() => {
 
                       <!-- Dialog Content -->
                       <VCard>
-                        <ModalVerticalNavLayout
-                          :nav-items="navItems"
-                        >
-                          <div>
-                            <VToolbar color="primary">
+                        <!-- Toolbar -->
+                        <div>
+                          <VToolbar color="primary">
+                            <VSpacer />
+
+                            <VToolbarItems>
                               <VBtn
                                 icon
                                 variant="plain"
@@ -256,91 +272,109 @@ const paginationData = computed(() => {
                                   icon="tabler-x"
                                 />
                               </VBtn>
-  
-                              <VToolbarTitle>Settings</VToolbarTitle>
-  
-                              <VSpacer />
-  
-                              <VToolbarItems>
-                                <VBtn
-                                  variant="text"
-                                  @click="isDialogVisible = false"
+                            </VToolbarItems>
+                          </VToolbar>
+                        </div>
+                        
+                        <!-- 👉 Faq sections and questions -->
+                        <VRow class="v-row-modal">
+                          <VCol
+                            v-show="faqs.length"
+                            cols="12"
+                            sm="4"
+                            lg="3"
+                            class="position-relative"
+                          >
+                            <!-- 👉 Tabs -->
+                            <VTabs
+                              v-model="activeTab"
+                              direction="vertical"
+                              class="v-tabs-pill"
+                              grow
+                            >
+                              <VTab
+                                v-for="faq in faqs"
+                                :key="faq.faqTitle"
+                                :value="faq.faqTitle"
+                                class="text-high-emphasis"
+                              >
+                                <VIcon
+                                  :icon="faq.faqIcon"
+                                  :size="20"
+                                  start
+                                />
+                                {{ faq.faqTitle }}
+                              </VTab>
+                            </VTabs>
+                          </VCol>
+
+                          <VCol
+                            cols="12"
+                            sm="8"
+                            lg="9"
+                          >
+                            <!-- 👉 Windows -->
+                            <VWindow
+                              v-model="activeTab"
+                              class="faq-v-window disable-tab-transition"
+                            >
+                              <VWindowItem
+                                v-for="faq in faqs"
+                                :key="faq.faqTitle"
+                                :value="faq.faqTitle"
+                              >
+                                <div class="d-flex align-center mb-6">
+                                  <VAvatar
+                                    rounded
+                                    color="primary"
+                                    variant="tonal"
+                                    class="me-3"
+                                    size="large"
+                                  >
+                                    <VIcon
+                                      :size="32"
+                                      :icon="faq.faqIcon"
+                                    />
+                                  </VAvatar>
+
+                                  <div>
+                                    <h6 class="text-h6">
+                                      {{ faq.faqTitle }}
+                                    </h6>
+                                    <span class="text-sm">{{ faq.faqSubtitle }}</span>
+                                  </div>
+                                </div>
+
+                                <VExpansionPanels
+                                  v-model="activeQuestion"
+                                  multiple
                                 >
-                                  Save
-                                </VBtn>
-                              </VToolbarItems>
-                            </VToolbar>
-                          </div>
-                        </ModalVerticalNavLayout>
+                                  <VExpansionPanel
+                                    v-for="item in faq.faqs"
+                                    :key="item.question"
+                                    :title="item.question"
+                                    :text="item.answer"
+                                  />
+                                </VExpansionPanels>
+                              </VWindowItem>
+                            </VWindow>
+                          </VCol>
 
-
-                        <!-- List -->
-                        <VList lines="two">
-                          <VListSubheader>User Controls</VListSubheader>
-                          <VListItem
-                            title="Content filtering"
-                            subtitle="Set the content filtering level to restrict apps that can be downloaded"
-                          />
-                          <VListItem
-                            title="Password"
-                            subtitle="Require password for purchase or use password to restrict purchase"
-                          />
-                        </VList>
-
-                        <VDivider />
-
-                        <!-- List -->
-                        <VList
-                          lines="two"
-                          select-strategy="classic"
-                        >
-                          <VListSubheader>General</VListSubheader>
-
-                          <VListItem
-                            title="Notifications"
-                            subtitle="Notify me about updates to apps or games that I downloaded"
-                            value="Notifications"
+                          <VCol
+                            v-show="!faqs.length"
+                            cols="12"
+                            :class="!faqs.length ? 'd-flex justify-center align-center' : ''"
                           >
-                            <template #prepend="{ isActive }">
-                              <VListItemAction start>
-                                <VCheckbox
-                                  :model-value="isActive"
-                                  color="primary"
-                                />
-                              </VListItemAction>
-                            </template>
-                          </VListItem>
-
-                          <VListItem
-                            title="Sound"
-                            subtitle="Auto-update apps at any time. Data charges may apply"
-                            value="Sound"
-                          >
-                            <template #prepend="{ isActive }">
-                              <VListItemAction start>
-                                <VCheckbox
-                                  :model-value="isActive"
-                                  color="primary"
-                                />
-                              </VListItemAction>
-                            </template>
-                          </VListItem>
-
-                          <VListItem
-                            title="Auto-add widgets"
-                            subtitle="Automatically add home screen widgets"
-                            value="Auto-add widgets"
-                          >
-                            <template #prepend="{ isActive }">
-                              <VListItemAction start>
-                                <VCheckbox
-                                  :model-value="isActive"
-                                  color="primary"
-                                />
-                              </VListItemAction>
-                            </template>
-                          </VListItem>
-                        </VList>
+                            <VIcon
+                              icon="tabler-help"
+                              start
+                              size="20"
+                            />
+                            <span class="text-base font-weight-medium">
+                              No Results Found!!
+                            </span>
+                          </VCol>
+                        </VRow>
                       </VCard>
                     </VDialog>
                   </h6>
